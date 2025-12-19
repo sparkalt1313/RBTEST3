@@ -1,0 +1,125 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<title>Launch</title>
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+<style>
+html, body {
+  margin: 0;
+  padding: 0;
+  height: 100%;
+  background: #000;
+}
+
+button {
+  width: 100%;
+  height: 100%;
+  font-size: 24px;
+  background: #000;
+  color: #fff;
+  border: none;
+  cursor: pointer;
+}
+</style>
+</head>
+
+<body>
+
+<button onclick="launch()">Click to Play</button>
+
+<script>
+function launch() {
+  const w = window.open("about:blank", "_blank");
+  if (!w) {
+    alert("Popup blocked");
+    return;
+  }
+
+  w.document.open();
+  w.document.write(`
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0, user-scalable=no">
+<title>Bank Robbery 2</title>
+
+<style>
+#button {
+  display: none;
+}
+
+.imgb_vis {
+  animation: imgb-animation 7s linear;
+}
+
+@keyframes imgb-animation {
+  10% { transform: translateX(0); }
+  20% { transform: translateX(100px); }
+  90% { transform: translateX(100px); }
+  100% { transform: translateX(0); }
+}
+</style>
+
+<link rel="stylesheet"
+href="https://cdn.jsdelivr.net/gh/linkd1/g@e079e474647ea113968cdc140ca97380be6409af/BANKROBBERY2/TemplateData/style.css">
+
+</head>
+
+<body class="dark" dir="ltr">
+
+<div id="unity-container" class="unity-desktop">
+  <canvas id="unity-canvas"></canvas>
+</div>
+
+<div id="loading-cover">
+  <div id="unity-loading-bar">
+    <div id="unity-logo"></div>
+    <div id="unity-progress-bar-empty">
+      <div id="unity-progress-bar-full"></div>
+    </div>
+    <div class="spinner"></div>
+  </div>
+</div>
+
+<script src="https://cdn.jsdelivr.net/gh/st39/sdk@main/api.js"><\/script>
+<script src="https://cdn.jsdelivr.net/gh/linkd1/g@e079e474647ea113968cdc140ca97380be6409af/BANKROBBERY2/Build/BankRobbery2.loader.js"><\/script>
+
+<script>
+const canvas = document.querySelector("#unity-canvas");
+const loadingCover = document.querySelector("#loading-cover");
+const progressBar = document.querySelector("#unity-progress-bar-full");
+
+const config = {
+  dataUrl: "https://cdn.jsdelivr.net/gh/linkd1/g@e079e474647ea113968cdc140ca97380be6409af/BANKROBBERY2/Build/BankRobbery2.data.unityweb",
+  frameworkUrl: "https://cdn.jsdelivr.net/gh/linkd1/g@e079e474647ea113968cdc140ca97380be6409af/BANKROBBERY2/Build/BankRobbery2.framework.js.unityweb",
+  codeUrl: "https://cdn.jsdelivr.net/gh/linkd1/g@e079e474647ea113968cdc140ca97380be6409af/BANKROBBERY2/Build/BankRobbery2.wasm.unityweb",
+  streamingAssetsUrl: "StreamingAssets",
+  companyName: "JustAlien",
+  productName: "BankRobbery2",
+  productVersion: "1.0"
+};
+
+createUnityInstance(canvas, config, (progress) => {
+  progressBar.style.width = (progress * 100) + "%";
+}).then(() => {
+  loadingCover.style.display = "none";
+}).catch(err => {
+  alert(err);
+});
+<\/script>
+
+</body>
+</html>
+`);
+  w.document.close();
+
+  // Request fullscreen if allowed
+  w.document.documentElement.requestFullscreen?.();
+}
+</script>
+
+</body>
+</html>
